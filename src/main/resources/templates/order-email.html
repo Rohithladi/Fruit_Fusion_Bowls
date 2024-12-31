@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 20px;
+            background-color: #f4f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            margin: auto;
+        }
+        h2, h3 {
+            color: #1d3557;
+        }
+        .summary {
+            background-color: #e9f6fe;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .summary p {
+            margin: 10px 0;
+            font-size: 1.1em;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #457b9d;
+            color: #ffffff;
+        }
+        tr:nth-child(even) {
+            background-color: #f4f7fa;
+        }
+        tr:nth-child(odd) {
+            background-color: #ffffff;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.9em;
+            color: #777;
+        }
+    </style>
+    <title>Order Summary</title>
+</head>
+<body>
+    <div class="container">
+        <h2>New Order Notification</h2>
+        <p>Dear Admin,</p>
+        <p>A new order has been placed. Please find the order details below:</p>
+
+        <div class="summary">
+            <p><strong>Order ID:</strong> <span th:text="${order.id}"></span></p>
+            <p><strong>Customer Name:</strong> <span th:text="${order.userName}"></span></p>
+             <p><strong>Mobile:</strong> <span th:text="${order.userMobile}"></span></p>
+
+            
+            <p><strong>Total Cost:</strong> <span th:text="${order.totalCost}"></span></p>
+        </div>
+
+        <h3>Order Items</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Item Name</th>
+                    <th>Quantity</th>
+                    <th>Unit Cost</th>
+                    <th>Total Cost</th>
+                     
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="item : ${order.items}">
+                    <td th:text="${item.itemName}"></td>
+                    <td th:text="${item.quantity}"></td>
+                    <td th:text="${item.cost}"></td>
+                    <td th:text="${item.cost * item.quantity}"></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p>If you have any questions or require assistance, please contact the support team.</p>
+
+        <div class="footer">
+            <p>&copy; 2024 Your Company. Confidential Information.</p>
+        </div>
+    </div>
+</body>
+</html>
